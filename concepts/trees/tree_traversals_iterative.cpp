@@ -14,6 +14,20 @@ struct node{
         left=right=NULL;
     }
 };
+void preorder2(node* root){
+    if(root==NULL) return;
+    stack<node* > s;
+    s.push(root);
+    node* temp=NULL;
+    while(!s.empty()){
+        temp=s.top();
+        cout<<temp->data<<" ";
+        s.pop();
+        if(temp->right!=NULL) s.push(temp->right);
+        if(temp->left!=NULL) s.push(temp->left);
+    }
+    // cout<<endl;
+}
 void inorder(node* root){
     if(root==NULL) return;
     inorder(root->left);
@@ -77,10 +91,10 @@ void topview(node* head){
     }
     cout<<endl;
 }
-void leftview(node* root){
-    if(root==NULL) return;
+// void leftview(node* root){
+//     if(root==NULL) return;
     
-}
+// }
 int main(){
     node* head=new node('A');
     head->left = new node('B');
@@ -95,6 +109,8 @@ int main(){
     inorder(head);
     cout<<endl;
     preorder(head);
+    cout<<endl;
+    preorder2(head);
     cout<<endl;
     postorder(head);
     cout<<endl;
