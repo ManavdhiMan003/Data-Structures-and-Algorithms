@@ -28,6 +28,22 @@ void preorder2(node* root){
     }
     // cout<<endl;
 }
+void inorder2(node* root){
+    if(root==NULL) return;
+    stack<node*> s;
+    // s.push(root);
+    node* temp=root;
+    while(!s.empty()||temp!=NULL){
+        while(temp!=NULL){
+            s.push(temp);
+            temp=temp->left;
+        }
+        temp=s.top();
+        s.pop();
+        cout<<temp->data<<" ";
+        temp=temp->right;
+    }
+}
 void inorder(node* root){
     if(root==NULL) return;
     inorder(root->left);
@@ -107,6 +123,8 @@ int main(){
     head->left->right = new node('E');
     head->left->left->right = new node('H');
     inorder(head);
+    cout<<endl;
+    inorder2(head);
     cout<<endl;
     preorder(head);
     cout<<endl;
