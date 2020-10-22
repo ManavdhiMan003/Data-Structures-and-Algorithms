@@ -154,6 +154,23 @@ void topview(node* head){
 //     if(root==NULL) return;
     
 // }
+node* buildtree(char in[],char pre[],int s,int e){
+    if(s>e) return NULL;
+    static int i=0;
+    char c=pre[i++];
+    node* temp=new node(c);
+    if(s==e) return temp;
+    int id=0;
+    for(int i=s;i<=e;i++){
+        if(c==in[i]){
+            id=i;
+            break;
+        }
+    }
+    temp->left=buildtree(in,pre,s,id-1);
+    temp->right=buildtree(in,pre,id+1,e);
+    return temp;    
+}
 int main(){
     node* head=new node('A');
     head->left = new node('B');
@@ -183,5 +200,11 @@ int main(){
     cout<<nodes(head)<<endl;
     cout<<finddepth(head)<<endl;
     topview(head);
+    cout<<"yup\n";
+    char in[] = { 'D', 'B', 'E', 'A', 'F', 'C' };  
+    char pre[] = { 'A', 'B', 'D', 'E', 'C', 'F' };  
+    int len = sizeof(in) / sizeof(in[0]);  
+    node* root = buildtree(in, pre, 0, len - 1);
+    inorder(root);
     return 0;
 }
