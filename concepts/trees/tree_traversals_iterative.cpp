@@ -83,6 +83,31 @@ void postorder2(node* root){
         s2.pop();
     }
 }
+void postorder3(node* root){
+    if(root==NULL) return;
+    stack<node*> s;
+    node *temp=root;
+    while(temp||!s.empty()){
+        if(temp!=NULL){
+            s.push(temp);
+            temp=temp->left;    
+        }
+        else{
+            node *temp2=s.top()->right;
+            if(!temp2){
+                temp2=s.top();
+                s.pop();
+                cout<<temp2->data<<" ";
+                while(!s.empty()&&temp2==s.top()->right){
+                    temp2=s.top();
+                    s.pop();
+                    cout<<temp2->data<<" ";
+                }
+            }
+            else  temp=temp2;
+        }
+    }
+}
 void levelorder(node* root){
     if(root==NULL) return;
     queue<node*> q;
@@ -151,6 +176,8 @@ int main(){
     postorder(head);
     cout<<endl;
     postorder2(head);
+    cout<<endl;
+    postorder3(head);
     cout<<endl;
     levelorder(head);
     cout<<nodes(head)<<endl;
