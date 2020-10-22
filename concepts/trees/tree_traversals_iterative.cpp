@@ -150,10 +150,18 @@ void topview(node* head){
     }
     cout<<endl;
 }
-// void leftview(node* root){
-//     if(root==NULL) return;
-    
-// }
+void inorder_leftview(node* root,int *level,int curr){
+    if(root==NULL) return;
+    if(curr>*level){
+        cout<<root->data<<" ";
+        *level=curr;
+    }  
+    inorder_leftview(root->left,level,curr+1);
+    inorder_leftview(root->right,level,curr+1);
+}
+void leftview(node* root){
+    int level=0;
+    inorder
 node* buildtree(char in[],char pre[],int s,int e){
     if(s>e) return NULL;
     static int i=0;
@@ -206,5 +214,7 @@ int main(){
     int len = sizeof(in) / sizeof(in[0]);  
     node* root = buildtree(in, pre, 0, len - 1);
     inorder(root);
+    cout<<"\n";
+    leftview(head);
     return 0;
 }
