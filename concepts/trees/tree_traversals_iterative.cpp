@@ -161,7 +161,21 @@ void inorder_leftview(node* root,int *level,int curr){
 }
 void leftview(node* root){
     int level=0;
-    inorder
+    inorder_leftview(root,&level,1);
+}
+void inorder_rightview(node* root,int *level,int curr){
+    if(root==NULL) return;
+    if(curr>*level){
+        cout<<root->data<<" ";
+        *level=curr;
+    }  
+    inorder_rightview(root->right,level,curr+1);
+    inorder_rightview(root->left,level,curr+1);
+}
+void rightview(node* root){
+    int level=0;
+    inorder_rightview(root,&level,1);
+}
 node* buildtree(char in[],char pre[],int s,int e){
     if(s>e) return NULL;
     static int i=0;
