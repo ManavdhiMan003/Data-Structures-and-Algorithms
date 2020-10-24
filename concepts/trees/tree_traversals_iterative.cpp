@@ -193,6 +193,25 @@ node* buildtree(char in[],char pre[],int s,int e){
     temp->right=buildtree(in,pre,id+1,e);
     return temp;    
 }
+void bottomview(node* root){
+    if(root==NULL) return;
+    map<int,char> m;
+    queue<pair<node*,int>> q;
+    q.push({root,0});
+    node* temp=NULL;
+    m[0]=root->data;
+    int hd=0;
+    while(!q.empty()){
+        temp=q.front().first;
+        hd=q.front().second;
+        q.pop();
+        m[hd]=temp->data;
+        if(temp->left) q.push({temp->left,hd-1});
+        if(temp->right) q.push({temp->right,hd+1});
+    }
+    for(auto x:m)   cout<<x.second<<" ";
+    cout<<endl;
+}
 int main(){
     node* head=new node('A');
     head->left = new node('B');
@@ -230,5 +249,9 @@ int main(){
     inorder(root);
     cout<<"\n";
     leftview(head);
+    cout<<"\n";
+    rightview(head);
+    cout<<"\n";
+    bottomview(head);
     return 0;
 }
