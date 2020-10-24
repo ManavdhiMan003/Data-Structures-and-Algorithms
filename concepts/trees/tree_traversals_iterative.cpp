@@ -212,6 +212,28 @@ void bottomview(node* root){
     for(auto x:m)   cout<<x.second<<" ";
     cout<<endl;
 }
+void printlevel(node* root,int level,bool b){
+    if(root==NULL) return;
+    if(level==1) cout<<root->data<<" ";
+    else if(level>1){
+        if(b){
+            printlevel(root->left,level-1,b);
+            printlevel(root->right,level-1,b);
+        }
+        else{
+            printlevel(root->right,level-1,b);
+            printlevel(root->left,level-1,b);
+        }
+    }
+}
+void spiral(node* root){
+    int h=height(root);
+    bool b=false;
+    for(int i=0;i<=h;i++){
+        printlevel(root,i,b);
+        b=!b;
+    }
+}
 int main(){
     node* head=new node('A');
     head->left = new node('B');
@@ -253,5 +275,6 @@ int main(){
     rightview(head);
     cout<<"\n";
     bottomview(head);
+    spiral(head);
     return 0;
 }
