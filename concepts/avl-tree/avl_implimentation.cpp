@@ -53,6 +53,18 @@ void LLrotation(node** root){
     *root=p;
     return;
 }
+void LRrotation(node** root){
+    node *temp=(*root)->left;
+    node* temp2=temp->right;
+    temp->right=temp2->left;
+    (*root)->left=temp2->right;
+    temp2->left=temp;
+    temp2->right=*root;
+    temp2->ht=height(temp2);
+    temp->ht=height(temp);
+    (*root)->ht=height(*root);
+    *root=temp2;
+}
 void insert(node** root,int x){
     node* temp=new node(x);
     if(*root==NULL){
@@ -67,10 +79,11 @@ void insert(node** root,int x){
         LLrotation(&(*root));
         bug();
     }
-    // else if(balancefactor(*root)==2&&balancefactor((*root)->left)==-1){
-    //     LRrotation(&(*root));
-    // }
-    // else if(balancefactor(*root)==-2&&balancefactor((*root)->right)==1){
+    else if(balancefactor(*root)>1&&x>(*root)->left->data){
+        cout<<"yes\n";
+        LRrotation(&(*root));
+    }
+    // else if(balancefactor(*root)<-1&&x>(*root)->right->data){
     //     RRrotation(&(*root));
     // }
     // else if(balancefactor(*root)==-2&&balancefactor((*root)->right)==-1){
@@ -84,9 +97,9 @@ int main(){
     node* head=NULL;
     insert(&head,5);
     // cout<<head->data<<"\n";
-    insert(&head,4);
-    // cout<<head->data<<"\n";
     insert(&head,3);
+    // cout<<head->data<<"\n";
+    insert(&head,4);
     preorder(head);
     return 0;
 }
