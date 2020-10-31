@@ -62,8 +62,9 @@ int main(){
         insert(a,i);
     }
     for(int i=1;i<8;i++) cout<<a[i]<<" ";
-    cout<<endl;
+    cout<<endl; 
     for(int i=7;i>0;i--) del(a,i);
-    for(int i=1;i<8;i++) cout<<a[i]<<" ";
+    cout<<"sorted order\n";
+    for(int i=7;i>0;i--) cout<<a[i]<<" ";
     return 0;   
 }
